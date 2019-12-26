@@ -2,6 +2,7 @@ package com.example.fm.base;
 
 import android.app.Application;
 
+import com.example.fm.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 
@@ -10,6 +11,10 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        /**
+         * 初始化喜马拉雅的SDK
+         */
         CommonRequest mXimalaya = CommonRequest.getInstanse();
         if(DTransferConstants.isRelease) {
             String mAppSecret = "8646d66d6abe2efd14f2891f9fd1c8af";
@@ -22,5 +27,8 @@ public class BaseApplication extends Application {
             mXimalaya.setPackid("com.ximalaya.qunfeng");
             mXimalaya.init(this ,mAppSecret);
         }
+
+//        初始化日志工具类
+        LogUtil.init(this.getPackageName(),false);
     }
 }
